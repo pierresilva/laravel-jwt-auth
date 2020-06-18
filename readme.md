@@ -205,6 +205,8 @@ Example Response:
 ### api/jwt-auth/logout
 **Logout User**
 
+Headers: "Authorization: Bearer token_string"
+
 Method: POST
 
 Example Request: NA
@@ -218,7 +220,7 @@ Example Response:
 ### api/jwt-auth/refresh
 **Refresh Token**
 
-Headers: "Authorization: Bearer 'token string'"
+Headers: "Authorization: Bearer token_string"
 
 Method: POST
 
@@ -239,7 +241,7 @@ Example Response:
 ### api/jwt-auth/profile
 **Get User Profile**
 
-Headers: "Authorization: Bearer 'token string'"
+Headers: "Authorization: Bearer token_string"
 
 Method: GET
 
