@@ -2,7 +2,6 @@
 
 namespace pierresilva\JWTAuth\Controllers;
 
-use http\Env\Response;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -106,7 +105,10 @@ class JWTAuthController extends Controller
 
         return response()->json([
             'message' => 'Profile obtained successfully',
-            'data' => auth()->user()
+            'data' => [
+                'user' => auth()->user(),
+                'acl' => $this->getAccessControlData()
+            ]
         ]);
     }
 
@@ -153,5 +155,22 @@ class JWTAuthController extends Controller
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60
         ]);
+    }
+
+    /**
+     * Get access control data (roles and permissions)
+     *
+     * @return array
+     */
+    private function getAccessControlData()
+    {
+        $acl = [];
+
+        if (class_exists('\pierresilva\AccessControl\AccessControl')) {
+            $acl['roles'] = \auth()->user()->getRoles();
+            $acl['permissions'] = \auth()->user()->getPermissions();
+        }
+
+        return $acl;
     }
 }
