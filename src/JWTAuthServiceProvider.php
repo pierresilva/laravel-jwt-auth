@@ -12,6 +12,7 @@ class JWTAuthServiceProvider extends ServiceProvider
     {
 
         include __DIR__.'/Routes/api.php';
+        $this->loadTranslationsFrom(__DIR__.'/resources/lang', 'jwt');
 
     }
 
