@@ -38,7 +38,7 @@ class JWTAuthController extends Controller
 
         if ($validator->fails()) {
             return \response()->json([
-                'message' => 'Validation fails',
+                'message' => __('Validation error'),
                 'errors' => $validator->errors()
             ], 422);
         }
@@ -49,7 +49,7 @@ class JWTAuthController extends Controller
         ));
 
         return response()->json([
-            'message' => 'Successfully registered',
+            'message' => __('Successfully registered'),
             'user' => $user
         ], 201);
     }
@@ -75,9 +75,9 @@ class JWTAuthController extends Controller
 
         if (! $token = auth()->attempt($validator->validated())) {
             return response()->json([
-                'message' => 'Email or password not valid',
+                'message' => __('Email or password not valid'),
                 'errors' => [
-                    'authentication' => 'Unauthorized'
+                    'authentication' => __('Unauthorized')
                 ]
             ], 401);
         }
@@ -85,7 +85,7 @@ class JWTAuthController extends Controller
         $data = $this->createNewToken($token);
 
         return \response()->json([
-            'message' => 'Logged in successfully',
+            'message' => __('Logged in successfully'),
             'data' => $data->original,
         ]);
     }
@@ -99,12 +99,12 @@ class JWTAuthController extends Controller
     {
         if (! \auth()->user()) {
             return response()->json([
-                'message' => 'Not authorized',
+                'message' => __('Not authorized'),
             ], 401);
         }
 
         return response()->json([
-            'message' => 'Profile obtained successfully',
+            'message' => __('Profile obtained successfully'),
             'data' => [
                 'user' => auth()->user(),
                 'acl' => $this->getAccessControlData()
@@ -122,7 +122,7 @@ class JWTAuthController extends Controller
         auth()->logout();
 
         return response()->json([
-            'message' => 'Successfully logged out'
+            'message' => __('Successfully logged out')
         ]);
     }
 
@@ -136,7 +136,7 @@ class JWTAuthController extends Controller
         $data = $this->createNewToken(auth()->refresh());
 
         return \response()->json([
-            'message' => 'Token refreshed successfully',
+            'message' => __('Token refreshed successfully'),
             'data' => $data->original
         ]);
     }
