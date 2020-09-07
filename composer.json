@@ -5,8 +5,8 @@
     "type": "package",
     "require": {
         "php": ">=7.2.5",
-        "illuminate/support": ">=7.*",
-        "laravel/framework": ">=7.*",
+        "illuminate/support": ">=7.27.0",
+        "laravel/framework": ">=7.27.0",
         "tymon/jwt-auth": "^1.0"
     },
     "license": "MIT",
